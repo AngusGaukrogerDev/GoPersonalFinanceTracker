@@ -43,9 +43,9 @@ func GetBankAccountBalance(c *gin.Context) {
 	}
 
 	// Log the output as the message variable
-	res := string(body)
-	log.Println("Response Message:", res)
+	response := string(body)
+	log.Println("Response Message:", response)
 
 	// Return the message as JSON
-	c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusOK, response)
 }
