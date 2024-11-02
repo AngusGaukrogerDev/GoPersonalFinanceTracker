@@ -24,7 +24,7 @@ func main() {
 			"message": "Hello World",
 		})
 	})
-
+	r.POST("/login", handlers.Login)
 	bankAccount := r.Group("/bank_account")
 	{
 		bankAccount.GET("", handlers.GetBankAccountBalance)
