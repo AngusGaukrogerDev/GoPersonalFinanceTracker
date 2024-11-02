@@ -11,7 +11,8 @@ import (
 )
 
 func GetBankAccountBalance(c *gin.Context) {
-	url := os.Getenv("STARLING_URL") + "/api/v2/accounts"
+	url := os.Getenv("STARLING_URL") + "/api/v2/accounts/" + os.Getenv("STARLING_USER_ID") + "/balance"
+	// "/api/v2/accounts"
 	// "/api/v2/accounts/{accountUid}/balance"
 
 	// Create the HTTP GET request
