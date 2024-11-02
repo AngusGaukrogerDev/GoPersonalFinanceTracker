@@ -7,7 +7,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func main() {
@@ -30,6 +29,6 @@ func main() {
 	{
 		bankAccount.GET("", handlers.GetBankAccountBalance)
 	}
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run() // listen and serve on :8080
 }

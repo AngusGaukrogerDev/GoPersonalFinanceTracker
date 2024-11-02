@@ -4,6 +4,7 @@ package handlers
 import (
 	"Modules/GoFinanceTracker/middleware"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,8 +20,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	// Here, validate the credentials (e.g., check in the database)
-	if credentials.Username != "admin" || credentials.Password != "password" {
+	if credentials.Username != os.Getenv("ADMIN_USERNAME") || credentials.Password != os.Getenv("ADMIN_PASSWORD") {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return
 	}
