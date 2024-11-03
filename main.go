@@ -4,7 +4,6 @@ import (
 	"Modules/GoFinanceTracker/api"
 	"Modules/GoFinanceTracker/middleware"
 	"fmt"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -16,14 +15,11 @@ func main() {
 		fmt.Println("Error loading .env file")
 	}
 
-	myVar := os.Getenv("API")
-	fmt.Println("API:", myVar)
-
 	r := gin.Default()
 
-	r.GET("/HelloWorld", func(ctx *gin.Context) {
+	r.GET("/Test", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
-			"message": "Hello World",
+			"message": "It Works!",
 		})
 	})
 
