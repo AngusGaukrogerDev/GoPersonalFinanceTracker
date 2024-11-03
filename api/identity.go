@@ -1,5 +1,5 @@
-// handlers/identity.go
-package handlers
+// api/identity.go
+package api
 
 import (
 	"Modules/GoFinanceTracker/middleware"

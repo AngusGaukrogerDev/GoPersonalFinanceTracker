@@ -1,5 +1,5 @@
-// handlers/bank_account.go
-package handlers
+// api/bank_account.go
+package api
 
 import (
 	"io"

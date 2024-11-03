@@ -1,7 +1,8 @@
 package main
 
 import (
-	"Modules/GoFinanceTracker/handlers"
+	"Modules/GoFinanceTracker/api"
+	"Modules/GoFinanceTracker/middleware"
 	"fmt"
 	"os"
 
@@ -19,15 +20,19 @@ func main() {
 	fmt.Println("API:", myVar)
 
 	r := gin.Default()
+
 	r.GET("/HelloWorld", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
 			"message": "Hello World",
 		})
 	})
-	r.POST("/login", handlers.Login)
+
+	r.POST("/login", api.Login)
+
 	bankAccount := r.Group("/bank_account")
+	bankAccount.Use(middleware.AuthMiddleware())
 	{
-		bankAccount.GET("", handlers.GetBankAccountBalance)
+		bankAccount.GET("", api.GetBankAccountBalance)
 	}
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run() // listen and serve on :8080
