@@ -33,6 +33,12 @@ func main() {
 		bankAccount.GET("/balance", api.GetBankAccountBalance)
 		bankAccount.GET("/kitty", api.GetFootballKittyBalance)
 	}
+
+	cryptoPortfolio := r.Group("/crypto_portfolio")
+	cryptoPortfolio.Use(middleware.AuthMiddleware())
+	{
+		cryptoPortfolio.GET("/prices", api.GetCurrentPortfolioValue)
+	}
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run() // listen and serve on :8080
 }
