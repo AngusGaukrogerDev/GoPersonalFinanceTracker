@@ -17,6 +17,8 @@ func main() {
 
 	r := gin.Default()
 
+	r.Use(middleware.CORSMiddleware())
+
 	r.GET("/test", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
 			"message": "It Works!",
