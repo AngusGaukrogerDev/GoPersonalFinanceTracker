@@ -17,7 +17,7 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/Test", func(ctx *gin.Context) {
+	r.GET("/test", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
 			"message": "It Works!",
 		})
@@ -28,7 +28,8 @@ func main() {
 	bankAccount := r.Group("/bank_account")
 	bankAccount.Use(middleware.AuthMiddleware())
 	{
-		bankAccount.GET("", api.GetBankAccountBalance)
+		bankAccount.GET("/balance", api.GetBankAccountBalance)
+		bankAccount.GET("/kitty", api.GetFootballKittyBalance)
 	}
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run() // listen and serve on :8080
