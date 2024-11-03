@@ -21,6 +21,5 @@ func GetBankAccountBalance(c *gin.Context) {
 
 	log.Println("Response Message:", response)
 
-	// Return the message as JSON
 	c.JSON(http.StatusOK, gin.H{"bankAccountBalance": response})
 }

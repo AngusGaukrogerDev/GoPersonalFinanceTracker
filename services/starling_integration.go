@@ -8,7 +8,6 @@ import (
 	"os"
 )
 
-// Define the structure to match the JSON response
 type BalanceResponse struct {
 	TotalEffectiveBalance struct {
 		Currency   string `json:"currency"`
@@ -16,7 +15,6 @@ type BalanceResponse struct {
 	} `json:"totalEffectiveBalance"`
 }
 
-// BankAccountService defines methods for retrieving account balances
 type BankAccountService interface {
 	GetBankAccountBalance(url string) int
 	// GetFootballKittyBalance() int
@@ -26,7 +24,6 @@ type AccountBalance struct {
 	totalBalance int
 }
 
-// Implement GetBankAccountBalance to fetch and return totalEffectiveBalance.minorUnits
 func (accountBalance *AccountBalance) GetBankAccountBalance(url string) int {
 	// Create the HTTP GET request
 	req, err := http.NewRequest(http.MethodGet, url, nil)
