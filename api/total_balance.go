@@ -13,6 +13,7 @@ func GetTotalBalance(c *gin.Context) {
 	// Initialize the service dependencies
 	bankAccountService := &services.AccountBalance{}
 	cryptoService := &services.CryptoData{}
+	vanguardService := services.NewFinancialDataService(os.Getenv("FINANCE_API_KEY"))
 
 	// Fetch bank account balance
 	bankAccountURL := os.Getenv("STARLING_URL") + "/api/v2/accounts/" + os.Getenv("STARLING_USER_ID") + "/balance"
@@ -58,8 +59,18 @@ func GetTotalBalance(c *gin.Context) {
 	}
 	log.Println("Cryptocurrency Portfolio Value:", cryptoPortfolioValue)
 
+	// Fetch Vanguard 2060 fund price and calculate the balance
+	stockPriceUSD, stockPriceGBP, currencyRate, err := vanguardService.GetVanguardFundPrice()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	vanguard_balance := stockPriceGBP * parseEnvFloat("VANGUARD_2060_QUANTITY")
+	log.Println("Vanguard Balance (GBP):", vanguard_balance)
+	log.Println("Vanguard price (USD):", stockPriceUSD)
+
 	// Calculate total balance
-	totalBalance := bankAccountBalance + cryptoPortfolioValue - footballKittyBalance
+	totalBalance := bankAccountBalance + cryptoPortfolioValue - footballKittyBalance + vanguard_balance
 	log.Println("Total Balance:", totalBalance)
 
 	// Return the total balance
@@ -68,5 +79,6 @@ func GetTotalBalance(c *gin.Context) {
 		"bank_account_balance":   bankAccountBalance,
 		"crypto_portfolio_value": cryptoPortfolioValue,
 		"football_kitty_balance": footballKittyBalance,
+		"vanguard_balance":       vanguard_balance,
 	})
 }

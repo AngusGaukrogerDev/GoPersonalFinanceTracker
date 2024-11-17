@@ -33,6 +33,11 @@ func main() {
 		bankAccount.GET("/balance", api.GetBankAccountBalance)
 		bankAccount.GET("/kitty", api.GetFootballKittyBalance)
 	}
+	vanguardPortfolio := r.Group("/vanguard_portfolio")
+	vanguardPortfolio.Use(middleware.AuthMiddleware())
+	{
+		vanguardPortfolio.GET("/balance", api.GetVanguard2060FundCurrentPrice)
+	}
 
 	cryptoPortfolio := r.Group("/crypto_portfolio")
 	cryptoPortfolio.Use(middleware.AuthMiddleware())
