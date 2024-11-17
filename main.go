@@ -37,7 +37,7 @@ func main() {
 	cryptoPortfolio := r.Group("/crypto_portfolio")
 	cryptoPortfolio.Use(middleware.AuthMiddleware())
 	{
-		cryptoPortfolio.GET("/prices", api.GetCurrentPortfolioValue)
+		cryptoPortfolio.GET("/balance", api.GetCurrentPortfolioValue)
 	}
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run() // listen and serve on :8080
