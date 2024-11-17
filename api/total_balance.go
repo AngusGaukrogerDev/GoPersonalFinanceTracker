@@ -68,6 +68,7 @@ func GetTotalBalance(c *gin.Context) {
 	vanguard_balance := stockPriceGBP * parseEnvFloat("VANGUARD_2060_QUANTITY")
 	log.Println("Vanguard Balance (GBP):", vanguard_balance)
 	log.Println("Vanguard price (USD):", stockPriceUSD)
+	log.Println("Exchange Rate:", currencyRate)
 
 	// Calculate total balance
 	totalBalance := bankAccountBalance + cryptoPortfolioValue - footballKittyBalance + vanguard_balance
