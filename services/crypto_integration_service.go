@@ -16,9 +16,9 @@ type CryptoService interface {
 
 // Define the structure of the JSON response
 type Quote struct {
-	USD struct {
+	GBP struct {
 		Price float64 `json:"price"`
-	} `json:"USD"`
+	} `json:"GBP"`
 }
 
 type CryptoData struct{}
@@ -33,6 +33,7 @@ func (c *CryptoData) GetCryptoData() ([]byte, error) {
 
 	q := url.Values{}
 	q.Add("symbol", "RAY,BONK,SOL,ADA,ETH,COTI,ALU,DOGE,JUP,WEN,LINK,CAKE,DOT,BNB,CHZ")
+	q.Add("convert", "GBP")
 	req.Header.Set("Accepts", "application/json")
 	req.Header.Add("X-CMC_PRO_API_KEY", os.Getenv("CMC_KEY"))
 	req.URL.RawQuery = q.Encode()
@@ -70,7 +71,7 @@ func (c *CryptoData) CalculateTotalValue(response []byte, quantities map[string]
 		if !exists {
 			continue // Skip symbols not present in the quantities map
 		}
-		totalValue += crypto.Quote.USD.Price * quantity
+		totalValue += crypto.Quote.GBP.Price * quantity
 	}
 
 	return totalValue, nil

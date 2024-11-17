@@ -47,7 +47,7 @@ func GetCurrentPortfolioValue(c *gin.Context) {
 	}
 
 	// Return the total value
-	c.JSON(http.StatusOK, gin.H{"total_value_usd": totalValue})
+	c.JSON(http.StatusOK, gin.H{"total_value_gbp": totalValue})
 }
 func parseEnvFloat(key string) float64 {
 	valueStr := os.Getenv(key)
